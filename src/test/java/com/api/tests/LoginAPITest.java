@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 
 import com.api.pojos.UserCreds;
 import com.api.utils.ConfigManager;
+import com.api.utils.SpecUtil;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -25,13 +26,14 @@ public class LoginAPITest {
 		// Jatin has used pojo 
 		UserCreds userobj=new UserCreds("iamfd","password");
 
-		Response response = given().baseUri(ConfigManager.getProperty("BASE_URI")).contentType(ContentType.JSON)
-				.body(userobj).log().uri().log().headers().log().body().log().method()
+		Response response = given().spec(SpecUtil.requestspec(userobj))
+				.log().uri().log().headers().log().body().log().method()
 				
 			.when().post("/login")
             .then()
 				// .log().ifValidationFails()
-				.log().status().log().body().statusCode(200).body("message", Matchers.equalTo("Success"))
+            .spec(SpecUtil.responseSpecification())
+				.body("message", Matchers.equalTo("Success"))
 				.time(Matchers.lessThan(10000L)).extract().response();
 
 	}
