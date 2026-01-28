@@ -40,13 +40,13 @@ public class ConfigManager {
 		FileReader readerobj = null;
 		try {
 			readerobj = new FileReader(fileobj);
-			prop.load(readerobj);
+			prop.load(readerobj);  //loading the file
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public static String getProperty(String key) {
+	public static String getProperty(String key) {  //static method
 		return prop.getProperty(key);
 	}
 	

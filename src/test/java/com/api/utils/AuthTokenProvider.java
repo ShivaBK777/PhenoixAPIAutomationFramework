@@ -21,7 +21,7 @@ public class AuthTokenProvider {
 
 		// Extract token for indviual role and pass to UsedetailsAPITest
 
-		UserCreds user=null;
+		UserCreds user=null;  //user is passed as body in api below to generate token as per role
 		
 		if(role==Role.FD) {
 			user=new UserCreds("iamfd", "password");
@@ -47,8 +47,9 @@ public class AuthTokenProvider {
 
 		JsonPath json = res.jsonPath();
 		String token = json.getString("data.token");
-
-		System.out.println("TOken is- " + token);
+    
+		System.out.println("---------This token generated is used in headers-authorisation------");
+	//	System.out.println("TOken is- " + token);
 		return token;
 
 	}
