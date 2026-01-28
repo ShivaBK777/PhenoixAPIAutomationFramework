@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import com.api.constants.Role;
 import com.api.utils.AuthTokenProvider;
 import com.api.utils.ConfigManager;
+import com.api.utils.SpecUtil;
 
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
@@ -22,8 +23,7 @@ public class UserDetailsAPITest {
 
 		Header headerobj = new Header("Authorization",AuthTokenProvider.getToken(Role.FD));
 
-		Response response = given().baseUri(ConfigManager.getProperty("BASE_URI")) // REPLACE hard code URI
-				.contentType(ContentType.JSON).header(headerobj).log().uri().log().headers().log().method()
+		Response response = given().spec(SpecUtil.requestspecWithAUth(Role.FD))
 			.when()
 				.get("/userdetails")
 			.then().log().status().time(Matchers.lessThan(10000L)).statusCode(200)
