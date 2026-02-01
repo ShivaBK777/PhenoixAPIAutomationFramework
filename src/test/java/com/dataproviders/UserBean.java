@@ -1,13 +1,13 @@
-package com.demo.csv;
+package com.dataproviders;
 
-public class UserCredsPOJO {
+public class UserBean {
  String username,password;
  
-public UserCredsPOJO(){
+public UserBean(){
 	
 }
 
-public UserCredsPOJO(String username, String password) {
+public UserBean(String username, String password) {
 	super();
 	this.username = username;
 	this.password = password;
