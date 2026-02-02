@@ -2,6 +2,7 @@ package com.api.utils;
 
 import com.api.constants.Role;
 import com.api.pojos.UserCreds;
+import com.dataproviders.api.beans.UserBean;
 
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
@@ -57,6 +58,19 @@ public class SpecUtil {
 		.log(LogDetail.BODY)       //common assertions
 		.build();
 		return responsespec;
+	}
+
+	public static RequestSpecification requestspec(UserBean userbean) {
+		RequestSpecification spec=	new RequestSpecBuilder()
+				.setBaseUri(ConfigManager.getProperty("BASE_URI"))
+				.setContentType(ContentType.JSON)     //common assertions
+				.setBody(userbean)
+				.log(LogDetail.BODY)
+				.log(LogDetail.URI)
+				.log(LogDetail.METHOD)
+				.build();
+			return spec;
+		
 	}
 	
 }

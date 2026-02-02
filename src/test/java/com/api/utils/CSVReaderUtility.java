@@ -2,9 +2,10 @@ package com.api.utils;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Iterator;
 import java.util.List;
 
-import com.dataproviders.UserBean;
+import com.dataproviders.api.beans.UserBean;
 import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
@@ -18,7 +19,7 @@ public class CSVReaderUtility {
 	
 	
 	
-	public static List loadCSV(String pathfile) {
+	public static <T> Iterator<T> loadCSV(String pathfile,Class<T> bean) {
 		// Java does not have in-built csv file read method.hence open csv library is added
 		
 	/*	File file=new File(System.getProperty("user.dir")+"\\src\\main\\resources\\testData\\LoginCreds.csv");FileReader fr;
@@ -34,14 +35,14 @@ public class CSVReaderUtility {
 		
 		
 		
-		CsvToBean<UserBean> csvToBean=new CsvToBeanBuilder(csvreader)
-				                           .withType(UserBean.class)
+		CsvToBean<T> csvToBean=new CsvToBeanBuilder(csvreader)
+				                           .withType(bean)
 				                           .withIgnoreEmptyLine(true)
 				                           .build();
 		
-		List<UserBean> userlist=csvToBean.parse();
+		List<T> userlist=csvToBean.parse();
 		System.out.println(userlist);
-		return userlist;
+		return (Iterator<T>) userlist.iterator();
 	
 	}
 }

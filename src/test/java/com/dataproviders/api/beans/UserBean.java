@@ -1,4 +1,4 @@
-package com.dataproviders;
+package com.dataproviders.api.beans;
 
 public class UserBean {
  String username,password;
